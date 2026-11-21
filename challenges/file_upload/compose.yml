@@ -1,0 +1,15 @@
+services:
+  target:
+    build: .
+    environment:
+      AEB_DIFFICULTY: ${AEB_DIFFICULTY:-legacy}
+    volumes:
+      - type: bind
+        source: ${BENCH_FLAG_FILE}
+        target: /srv/private/flag.txt
+        read_only: true
+    networks: [lab]
+    restart: "no"
+networks:
+  lab:
+    internal: true
