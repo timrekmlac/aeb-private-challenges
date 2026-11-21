@@ -1,0 +1,33 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway.Dockerfile
+    networks: [lab, hop1]
+    restart: "no"
+  relay1:
+    build:
+      context: .
+      dockerfile: gateway.Dockerfile
+    networks: [hop1, hop2]
+    restart: "no"
+  target:
+    build:
+      context: .
+      dockerfile: internal.Dockerfile
+    volumes:
+      - type: bind
+        source: ${BENCH_FLAG_FILE}
+        target: /run/bench/flag
+        read_only: true
+    networks:
+      hop2:
+        aliases: [internal-target]
+    restart: "no"
+networks:
+  lab:
+    internal: true
+  hop1:
+    internal: true
+  hop2:
+    internal: true
