@@ -1,0 +1,3 @@
+C1 — synthetic Windows SeImpersonate lab
+
+Disposable Windows guest only. The PowerShell provisioner creates AEBLabUser, grants the SeImpersonatePrivilege right, and installs a SYSTEM scheduled task that connects to named pipe AEBHostSync. The independent grader checks a protected SYSTEM-owned proof file against a random secret. This creates the test conditions but does NOT verify exploitability on any particular Windows build. Run a clean positive/negative control and snapshot-reset test before calling it validated. No generic exploitation program is shipped. See docs/WINDOWS_CODEBASE.md for controller prerequisites.
